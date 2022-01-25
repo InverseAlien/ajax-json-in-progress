@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-ewidth, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>External API - JSON</title>
+</head>
+
+<body>
+
+  <button id="button">Load Catalog</button>
+  <button id="Button">Filter Modules</button>
+  <br><br>
+  <h1>Module Catalog</h1>
+  <div id="button"></div>
+
+
+  <script>
+    document.getElementById('button').addEventListener('click', loadCatalog);
+
+    function loadCatalog() {
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://docs.microsoft.com/api/learn/catalog/', true);
+
+      xhr.onload = function() {
+        if (this.status == 200) {
+          let catalog = JSON.parse(this.responseText);
+
+          console.log(catalog);
+        }
+      }
+/*
+          let output = '';
+          for (let i in modules) {
+            output +=
+              '<div class="container">' +
+              '<img src=" ' + modules[i].icon_url + '" width="70" height="70">' +
+              '<ul>' +
+              '<li>Type: ' + modules[i].type + '</li>' +
+              '<li>Url: ' + modules[i].url + '</li>' +
+              '</ul>' +
+              '</div>';
+          }
+
+          document.getElementById('modules').innerHTML = output;
+        }
+
+      }
+      */
+
+      xhr.send();
+}
+
+  </script>
+
+</body>
+
+</html>
